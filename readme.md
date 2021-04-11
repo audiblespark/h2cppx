@@ -27,7 +27,7 @@ Use your favorite plugin manager to install the plugin:
 
 Example fo vim-plug:
 
-    Add `Plug 'keeneared/h2cppx-vim'` to ~/.vimrc and install it,then:
+Add `Plug 'keeneared/h2cppx-vim'` to ~/.vimrc and install it,then:
 
 Mapping example:
 
