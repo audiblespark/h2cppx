@@ -75,19 +75,19 @@ Usage
 -----
 The plugin function description:
 
-* :H2cppx  
+* `:H2cppx`  
   Parse the C++ header file and generate .cpp file with the same name
 
-* :CpH2cppx  
+* `:CpH2cppx`  
   Store file content in the register instead of creating a file. Paste with "p".
 
-* :H2cppxLine  
+* `:H2cppxLine`  
   Generate C++ code of the line under the cursor, and append it at the end of the .cpp file.
 
-* :CpH2cppxLine  
+* `:CpH2cppxLine`  
   Generate C++ code of the line under the cursor and store it in a register. Paste with "p". 
 
-* :H2cppxAuto  (Recommended)   
+* `:H2cppxAuto`  (Recommended)   
   Auto Contrast header and implementation files. Find
   function declarations in the header file and append
   the newly added to the implementation file. If the 
