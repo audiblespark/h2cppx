@@ -22,7 +22,7 @@ class Node(object):
                     self.children.append(child)
                 else:
                     raise TypeError('args must is subclass from Node')
-        except TypeError, msg:
+        except (TypeError,msg):
             print >>sys.stderr,'Exception: ',msg
             sys.exit()
 
@@ -227,9 +227,9 @@ if __name__=='__main__':
 
     h=Header('../sample/sample.h')
     for f in h.functions:
-        print f['path'], f['return_type'], f['name'], f['parameters'][0]['name'] if len(f['parameters'])>0 else None
+        print (f['path'], f['return_type'], f['name'], f['parameters'][0]['name']) if len(f['parameters'])>0 else None
 
     for c in h.classes:
         for f in c.methods:
-            print f['path'], f['return_type'], f['name'], f['parameters'][0]['name'] if len(f['parameters'])>0 else None
+            print (f['path'], f['return_type'], f['name'], f['parameters'][0]['name']) if len(f['parameters'])>0 else None
     

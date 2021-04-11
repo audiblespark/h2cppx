@@ -12,7 +12,8 @@ sys.path.append(cur_dir+'/template')
 import argparse
 from Parser import *
 from CodeGeneration import *
-from StringIO import StringIO
+import io
+from io import StringIO
 
 version_description = \
 """
@@ -193,7 +194,7 @@ def auto_handle(args):
         sys.exit(1)
     out.write(2*os.linesep)
 
-    print >>sys.stdout,"write file", path, "successful!"
+    print >>sys.stdout,"Writing file", path, "was successful!"
 
     buf.close()
     out.close()
@@ -204,7 +205,7 @@ def do_action(args):
     Config.init(args.template)
 
     if not os.path.exists(args.header_file):
-        print >>sys.stderr,'The header file not exist!!!'
+        print >>sys.stderr,'The header file does not exist!!!'
         sys.exit(2)
 
     if args.auto_handle:
@@ -213,7 +214,7 @@ def do_action(args):
     buf = StringIO()
     node = Header(os.path.abspath(args.header_file))
     if not node.functions and not node.classes:
-        print >>sys.stderr, 'Nothing generation,is this a header file?'
+        print >>sys.stderr, 'Nothing was generated. Is this a header file?'
         sys.exit(1)
 
     if args.line_number:
@@ -240,7 +241,7 @@ def do_action(args):
        sys.exit(4)
 
     #output
-    if buf.len:
+    if len(buf.getvalue()):
         out.write(buf.getvalue().lstrip(os.linesep).rstrip(os.linesep))
     else:
         print >>sys.stderr, 'Nothing generation'
@@ -251,14 +252,14 @@ def do_action(args):
         print >>sys.stdout,"write file", args.output, "successful!"
 
     buf.close()
-    if type(out) == file:
+    if type(out) == open:
         out.close()
 
 if __name__=='__main__':
     args = parser.parse_args()
     try:
         do_action(args)
-    except IOError,msg:
+    except (IOError,msg):
         print >>sys.stderr,"IOError: ", msg
         sys.exit(5)
 

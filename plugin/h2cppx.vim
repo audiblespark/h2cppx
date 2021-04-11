@@ -26,10 +26,6 @@ else
 endif
 
 
-if(system(s:python_path . ' -c "import sys; print sys.version_info[0]"') != "2\n")
-    echohl WarningMsg | echomsg "Loading of h2cppx failed. python2.x is required for h2cppx." | echohl None
-    finish
-endif
 
 let s:installed_directory = expand('<sfile>:p:h:h')
 let s:h2cppx_dir = s:installed_directory . "/h2cppx"

@@ -23,7 +23,7 @@ class Config(object):
 
     @staticmethod
     def init(filename):
-        data = file(filename).read()
+        data = open(filename, 'r').read()
         inside = False
         raw_content = ''
         #replace \n to \\n in " "
@@ -80,7 +80,7 @@ class ImplementGenerationVisitor(object):
         Will run for nodes that do specifically match the
         provided type.
         """
-        print 'Unrecognized node', node
+        print ('Unrecognized node', node)
 
     @visitor.when(Variable)
     def visit(self, node):
@@ -224,8 +224,8 @@ class ImplementGenerationVisitor(object):
 if __name__=='__main__':
     Config.init('../template/template1')
     head=Header('../sample/sample.h')
-    print 'Generate all head file implement: '
+    print ('Generate all head file implement: ')
     head.accept(ImplementGenerationVisitor())
-    print 'Generate special line_number %d implement: \n' % 15
+    print ('Generate special line_number %d implement: \n' % 15)
     head.getNodeInLine(15).accept(ImplementGenerationVisitor())
 
