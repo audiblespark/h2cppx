@@ -6,24 +6,25 @@ h2cppx(vim-port): Parse C++ header files and generate C++ implementation code
 
 **Author:** xiaok
 
-**External modules required:** cheetah3 yaml(python package)
+**Python modules required:** 
 
-**Third-party(the plugin already include):** pyvisitor CppHeaderParser(modification) 
+    cheetah3 yaml
 
-[Github-Link](https://github.com/xuqix/h2cppx.git)
+**Already included modules:** 
+
+    pyvisitor CppHeaderParser (modified) 
 
 Installation
 ------------
-Before start, make sure you have installed the python package "yaml",
-Then run below command:
+Make sure you have "yaml" and "cheetah3" modules installed:
 
     pip install cheetah3 yaml
 
-Use your favorite plugin manager to install it.
+Use your favorite plugin manager to install the plugin:
 
-Vim plug:
+Example fo vim-plug:
 
-`Plug 'keeneared/h2cppx-vim'` to ~/.vimrc and install it,then:
+    Add `Plug 'keeneared/h2cppx-vim'` to ~/.vimrc and install it,then:
 
 Mapping example:
 
