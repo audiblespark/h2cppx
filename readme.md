@@ -27,11 +27,10 @@ Use your favorite plugin manager to install the plugin:
 
 Example fo vim-plug:
 
-Add `Plug 'keeneared/h2cppx-vim'` to ~/.vimrc and install it,then:
+    `Plug 'keeneared/h2cppx-vim'`
 
 Mapping example:
 
-    e.g:
     nmap <F3>  :H2cppx<ESC>
     nmap <F4>  :H2cppxLine<ESC>
     nmap <F3>p :CpH2cppx<ESC>
