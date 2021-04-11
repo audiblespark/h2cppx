@@ -80,10 +80,6 @@ CLASS_END : ""
 
 #Header file at the beginning of the definnition
 HEADER_START : "
-/* 
- * Auto generate by h2cppx
- */
-
 
 \\#include \"$header.filename\"
 "

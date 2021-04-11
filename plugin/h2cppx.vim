@@ -27,7 +27,7 @@ endif
 
 
 if(system(s:python_path . ' -c "import sys; print sys.version_info[0]"') != "2\n")
-    echohl WarningMsg | echomsg "load h2cppx faild,python2.x is must need for h2cppx." | echohl None
+    echohl WarningMsg | echomsg "Loading of h2cppx failed. python2.x is required for h2cppx." | echohl None
     finish
 endif
 
@@ -75,7 +75,7 @@ function s:h2cppx(header_file, isClipboard)
     let cmd = printf('%s "%s" -t "%s" "%s" ', s:python_path, s:h2cppx_path, s:template_file, a:header_file)
     if ! (a:isClipboard == 1)
         if cpp_file == ""
-            let dir = input("Cpp File not find, please enter the new file output directory: ")
+            let dir = input("Cpp File not found, please enter the new file output directory: ")
             let cpp_file = s:fullpath(dir) . filename
         endif
         let cmd = cmd . " -o " . cpp_file
@@ -86,7 +86,7 @@ function s:h2cppx(header_file, isClipboard)
         if v:shell_error == 0
             if a:isClipboard == 1
                 call setreg('"+', content )
-                echo "Define code already copy to your clipboard,use p to paster!"
+                echo "Definition code was copied to clipboard"
             else
                 echo "Generate file " . cpp_file . " successful!"
             endif
@@ -97,7 +97,7 @@ function s:h2cppx(header_file, isClipboard)
         elseif v:shell_error == 3
             echo content 
         elseif v:shell_error == 4
-            let ans = input("file already exisit, force overwrite it?(yes/no): ")
+            let ans = input(".cpp file already exists. Overwrite it? (yes/no): ")
             if toupper(ans) == "YES" || toupper(ans) == "Y"
                 let cmd = printf('%s "%s" "%s" -t "%s" -o "%s" -f', s:python_path, s:h2cppx_path, a:header_file, s:template_file, cpp_file)
                 let content = system(cmd)
@@ -118,7 +118,7 @@ function s:h2cppx_line(header_file, line_number, isClipboard)
     let cmd = printf('%s "%s" "%s" -t "%s" -ln %d -a', s:python_path, s:h2cppx_path, a:header_file, s:template_file, ln)
     if ! (a:isClipboard == 1)
         if cpp_file == ""
-            let dir = input("Cpp File not find, please enter the new file output directory: ")
+            let dir = input("Cpp File not found, please enter the new file output directory: ")
             let cpp_file = s:fullpath(dir) . filename
         endif
         let cmd = cmd . " -o " . cpp_file
@@ -129,7 +129,7 @@ function s:h2cppx_line(header_file, line_number, isClipboard)
         if v:shell_error == 0
             if a:isClipboard == 1
                 call setreg('"+', content . "\n")
-                echo "Define code already copy to your clipboard,use p to paster!"
+                echo "Definition code copied to clipboard"
             else
                 echo "write file " . cpp_file . " successful!"
             endif
@@ -164,7 +164,7 @@ function s:h2cppx_auto(header_file)
     endif
 
     if cpp_file == ""
-        let dir = input("Cpp File not find, please enter the new file output directory: ")
+        let dir = input("Cpp File not found, please enter the new file output directory: ")
         let cmd = cmd . " --output-path=" . s:fullpath(dir)
     endif
     let content = system(cmd)

@@ -34,7 +34,7 @@ class Config(object):
                 raw_content += '\\n'
             else:
                 raw_content += c
-        content = yaml.load(raw_content)
+        content = yaml.load(raw_content, Loader=yaml.FullLoader)
         for k in content:
             v = content[k]
             if type(v) == type(''): 
