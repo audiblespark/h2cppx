@@ -1,5 +1,8 @@
 h2cppx(vim-port): Parse C++ header files and generate C++ implementation code 
 ===========================================================================
+
+**This is a Python 3 port of:** `https://github.com/vim-scripts/h2cppx`
+
 **Purpose:** Parse the C++ header file and generate C++ implementation code
 
 **Required:** Python 3.x
