@@ -1,12 +1,12 @@
-h2cppx(vim-port): parse the c++ header file and generate c++ implement code 
+h2cppx(vim-port): Parse C++ header files and generate C++ implementation code 
 ===========================================================================
-**Purpose:** Parse the c++ header file and generate c++ implement code for vim plugin
+**Purpose:** Parse the C++ header file and generate C++ implementation code
 
-**Required:** python 2.x
+**Required:** Python 3.x
 
 **Author:** xiaok
 
-**External module required:** cheetah yaml(python package)
+**External modules required:** cheetah3 yaml(python package)
 
 **Third-party(the plugin already include):** pyvisitor CppHeaderParser(modification) 
 
@@ -17,22 +17,15 @@ Installation
 Before start, make sure you have installed the python package "yaml",
 Then run below command:
 
-    cd ~/.vim/plugin
-    git clone 'https://github.com/xuqix/h2cppx.git
-    cd  h2cppx
-    git checkout vim-port
+    pip install cheetah3 yaml
 
-or you can use bundle to install it:
+Use your favorite plugin manager to install it.
 
-add `Bundle 'xuqix/h2cppx'` to ~/.vimrc and install it,then:
+Vim plug:
 
-    cd ~/.vim/bundle/h2cppx
-    git checkout vim-port
+`Plug 'keeneared/h2cppx-vim'` to ~/.vimrc and install it,then:
 
-Now you can start using it.
-
-After the installation is complete, 
-You can map the key in .vimrc to quickly use the command.
+Mapping example:
 
     e.g:
     nmap <F3>  :H2cppx<ESC>
@@ -44,81 +37,55 @@ You can map the key in .vimrc to quickly use the command.
 Config
 ------
 If the plugin can't find the python path in your computer,
-you need set "g:python_path" in the .vimrc file like this:
+you need set "g:python_path" in the .vimrc file:
 
     let g:h2cppx_python_path = '/usr/bin/python'
 
-and you can specify the cppfile name extension like this:
+and you can specify the .cpp file name extension like this:
 (default value is 'cpp')
 
     let g:h2cppx_postfix = 'cxx'
 
-five code-generate template file are provided by default,you 
-can config it in '.vimrc' like this(template0-4,default is template1):
+Five code-generate template file are provided by default, 
+you can configure them in '.vimrc' like this(template0-4,default is template1):
 
     let g:h2cppx_template = 'template4' 
 
-if needed,you can refer to the default template and write your own template
-files,and use absolute path config it :
+If needed, you can refer to the default template and write your own template
+files. Use the absolute path to configure it :
 
     let g:h2cppx_template = '/home/xxx/.../xxx'
 
-Finally,you can add a configuration file `.h2cppx_conf` in your project 
-directory to help plugin search for cppfile,otherwise the plugin will find
-cppfile in your header file directory.
+Finally, you can add a configuration file `.h2cppx_conf` in your project 
+directory to help the plugin search for a .cpp file. Otherwise the plugin will use
+.cpp file in your header file directory.
 The configuration file might look like:
     
     /home/test/temp/src
     src1
     src2
 
-see the project_sample directory.
+See the project_sample directory.
 
 Usage
 -----
 The plugin function description:
 
 * :H2cppx  
-  Parse c++ header file and generate cpp file 
+  Parse the C++ header file and generate .cpp file with the same name
 
 * :CpH2cppx  
-  Like :H2cppx,but generat code in your clipboard, no file writed,you can use "p" to get it.
+  Store file content in the register instead of creating a file. Paste with "p".
 
 * :H2cppxLine  
-  Generate cpp code in the cursor line,and append to the end of the cpp file
+  Generate C++ code of the line under the cursor, and append it at the end of the .cpp file.
 
 * :CpH2cppxLine  
-  Like :H2cppxLine,but generat code in your clipboard, no file writed,you can use "p" to get it.
+  Generate C++ code of the line under the cursor and store it in a register. Paste with "p". 
 
-* :H2cppxAuto  (Recommendation)   
-  Auto Contrast header and implementation files, find
+* :H2cppxAuto  (Recommended)   
+  Auto Contrast header and implementation files. Find
   function declarations in the header file and append
-  the newly added to the implementation file, if the 
-  file does not exist to achieve a new file is created!
-
-Example:
--------
-
-    vim test.h
-    :H2cppx  
-    Now you can find new file "test.cpp" in your directory
-
-    vim test.h
-    :H2cppxLine
-    Now you can find defined in your file "test.cpp" from current line of cursor 
-
-    vim test.h
-    :CpH2cppx  
-    Like :H2cppx, but defined in your clipboard, no file writed, just use "p" to get it.
-
-    vim test.h
-    :CpH2cppxLine  
-    Like :H2cppxLine, but defined in your clipboard, no file is writed.
-
-    vim test.h
-    :H2cppxAuto 
-    Auto Contrast header and implementation files, find function 
-    declarations in the header file and append the newly added to 
-    the implementation file, if the file does not exist to achieve 
-    a new file is created!
+  the newly added to the implementation file. If the 
+  file does not exist a new file is created!
 
