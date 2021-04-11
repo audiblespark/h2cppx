@@ -22,7 +22,7 @@ version_description = \
 
 description = \
 """
-    Parse C++ header file and generate c++ implement code. 
+    Parse C++ header file and generate C++ implement code. 
 """
 
 usage= \
@@ -49,7 +49,7 @@ parser = argparse.ArgumentParser(
         prog = 'h2cppx'
         )
 
-parser.add_argument("header_file", help = "Specific the c++ header file")
+parser.add_argument("header_file", help = "Specify the C++ header file")
 
 parser.add_argument(
         "-t", 
@@ -58,7 +58,7 @@ parser.add_argument(
         required = False,
         action  = "store",
         default = cur_dir+"/template/template1",
-        help = "Spcific the template config file"
+        help = "Specify the template config file"
         )
 
 parser.add_argument(
@@ -67,7 +67,7 @@ parser.add_argument(
         type = str,
         required = False,
         action = "store",
-        help = "Specific the cpp output file name, default is stdout"
+        help = "Specify the .cpp output file name, default is stdout"
         )
 parser.add_argument(
         "-ln",
@@ -75,7 +75,7 @@ parser.add_argument(
         type = int,
         required = False,
         action = "store",
-        help = "Specific the line number what generate cpp code"
+        help = "Specify the line number that generates the C++ code"
         )
 #mutually exclusive optional
 group = parser.add_mutually_exclusive_group()
@@ -85,7 +85,7 @@ group.add_argument(
         required = False,
         action = "store_true",
         default = False,
-        help = "If the cpp file already exist, append to the end of the file."
+        help = "If the .cpp file already exists, append it to the end of the file."
         )
 group.add_argument(
         "-f",
@@ -93,7 +93,7 @@ group.add_argument(
         required = False,
         action = "store_true",
         default = False,
-        help = "If the cpp file already exist,will force overwrite the cpp file!!!"
+        help = "If the .cpp file already exist, overwriting it is forced!!!"
         )
 group.add_argument(
         "-auto",
@@ -101,7 +101,7 @@ group.add_argument(
         required = False,
         action = "store_true",
         default = False,
-        help = "Auto Contrast header and implementation files, find function declarations in the header file and append the newly added to the implementation file, if the file does not exist to achieve a new file is created!"
+        help = "Auto Contrast header and implementation files. Find function declarations in the header file and append the newly added to the implementation file, if the file does not exist to achieve a new file is created!"
         )
 parser.add_argument(
         "-p",
@@ -115,13 +115,13 @@ parser.add_argument(
         "--search-path",
         required = False,
         action = "store",
-        help = "Setting implement search directory list, the default is the directory where the header file(for -auto only)"
+        help = "Setting the search directory list. The default is the directory where the header file(for -auto only)"
         )
 parser.add_argument(
         "--output-path",
         required = False,
         action = "store",
-        help = "Setting the implement file output directory,if the file search fails, it will generate a file in this directory.the default is the directory where the header file(for -auto only)"
+        help = "Setting the file output directory. If the file search fails, it will generate a file in this directory. The default is the directory where the header file(for -auto only)"
         )
 parser.add_argument(
         "-v",
@@ -139,7 +139,7 @@ def get_search_list(s):
     return [ os.path.abspath(p) for p in s.split(sep) ]
 
 def findpath(filename, search_list):
-    ''' search file in search path list '''
+    ''' Search the file in the search path list '''
     for _dir in search_list:
         path = _dir + os.sep + filename
         if os.path.exists(path):
@@ -190,7 +190,7 @@ def auto_handle(args):
     if buf.len:
         out.write(buf.getvalue().lstrip(os.linesep).rstrip(os.linesep))
     else:
-        print >>sys.stderr, 'Nothing generation'
+        print >>sys.stderr, 'Nothing generated'
         sys.exit(1)
     out.write(2*os.linesep)
 
@@ -205,7 +205,7 @@ def do_action(args):
     Config.init(args.template)
 
     if not os.path.exists(args.header_file):
-        print >>sys.stderr,'The header file does not exist!!!'
+        print >>sys.stderr,'The header file does not exist!'
         sys.exit(2)
 
     if args.auto_handle:
@@ -220,7 +220,7 @@ def do_action(args):
     if args.line_number:
         node = node.getNodeInLine(args.line_number)
         if not node:
-            print >>sys.stderr,'Specific the line number have not declare was found'
+            print >>sys.stderr,'The specifed line number could not be found'
             sys.exit(3)
 
     # generate implement code
@@ -237,19 +237,19 @@ def do_action(args):
     elif args.force:
         out = open(args.output, 'w')
     else:
-       print >>sys.stderr,'The output file already exist, please use "-a" arg to append to the end of the file  or "-f" to force overwrite.'
+       print >>sys.stderr,'The output file already exists. Please use "-a" arg to append to the end of the file  or "-f" to force an overwrite.'
        sys.exit(4)
 
     #output
     if len(buf.getvalue()):
         out.write(buf.getvalue().lstrip(os.linesep).rstrip(os.linesep))
     else:
-        print >>sys.stderr, 'Nothing generation'
+        print >>sys.stderr, 'Nothing generated'
         sys.exit(1)
     out.write(2*os.linesep)
 
     if out != sys.stdout:
-        print >>sys.stdout,"write file", args.output, "successful!"
+        print >>sys.stdout,"Writing file", args.output, "was successful!"
 
     buf.close()
     if type(out) == open:

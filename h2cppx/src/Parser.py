@@ -12,7 +12,7 @@ sys.path.append('external')
 from CppHeaderParser import CppHeaderParser
 
 class Node(object):
-    '''all parse object base class'''
+    '''Base class for all parse objects'''
 
     def __init__(self, *args):
         self.children = []
@@ -21,7 +21,7 @@ class Node(object):
                 if issubclass(child, self.__class__):
                     self.children.append(child)
                 else:
-                    raise TypeError('args must is subclass from Node')
+                    raise TypeError('args must be a subclass from Node')
         except (TypeError,msg):
             print >>sys.stderr,'Exception: ',msg
             sys.exit()
@@ -49,7 +49,7 @@ class Node(object):
 
 
 class Variable(Node):
-    ''' cpp variable object '''
+    ''' C++ variable object '''
 
     def __init__(self, info, access=None):
         super(Variable,self).__init__()

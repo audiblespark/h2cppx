@@ -25,8 +25,6 @@ else
     let s:template_file = 'template1'
 endif
 
-
-
 let s:installed_directory = expand('<sfile>:p:h:h')
 let s:h2cppx_dir = s:installed_directory . "/h2cppx"
 let s:h2cppx_path= s:h2cppx_dir . "/h2cppx.py"

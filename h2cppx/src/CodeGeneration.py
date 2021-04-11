@@ -49,8 +49,8 @@ class ImplementGenerationVisitor(object):
 
     def __init__(self, stream=sys.stdout):
         '''
-            stream parame specify code output stream,
-            you can set it as stdxxx, StringIO or any file object
+            Stream parameters specified by code output stream.
+            You can set it as stdxxx, StringIO or any file object
         '''
         self._stream = stream
 
@@ -112,7 +112,7 @@ class ImplementGenerationVisitor(object):
 
     @visitor.when(Class)
     def visit(self, node):
-        """ Matches nodes that contain class. """
+        """ Matches nodes that contain a class. """
         for attr in node.attributes:
             attr.accept(self)
         for method in node.methods:
@@ -120,7 +120,7 @@ class ImplementGenerationVisitor(object):
 
     @visitor.when(Header)
     def visit(self, node):
-        """ Matches nodes that contain header. """
+        """ Matches nodes that contain a header. """
         for function in node.functions:
             function.accept(self)
         for cls in node.classes:
@@ -224,8 +224,8 @@ class ImplementGenerationVisitor(object):
 if __name__=='__main__':
     Config.init('../template/template1')
     head=Header('../sample/sample.h')
-    print ('Generate all head file implement: ')
+    print ('Generate implementations of all header files : ')
     head.accept(ImplementGenerationVisitor())
-    print ('Generate special line_number %d implement: \n' % 15)
+    print ('Generate an implementation of a specified line_number %d: \n' % 15)
     head.getNodeInLine(15).accept(ImplementGenerationVisitor())
 
