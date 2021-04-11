@@ -179,7 +179,7 @@ def auto_handle(args):
         else:
             path = header_dir + os.sep + cppfilename
         if not os.path.exists(os.path.dirname(path)):
-            print >>sys.stderr,"The directory '"+os.path.dirname(path)+"' not exist!!!"
+            print ("The directory '"+os.path.dirname(path)+"' not exist!!!", file=sys.stderr)
             sys.exit(2)
         # generate implement code
         out = open(path, 'w')
@@ -187,14 +187,14 @@ def auto_handle(args):
         header.accept(visitor)
 
     #output
-    if buf.len:
+    if len(buf.getvalue()):
         out.write(buf.getvalue().lstrip(os.linesep).rstrip(os.linesep))
     else:
-        print >>sys.stderr, 'Nothing generated'
+        print ('Nothing generated', file=sys.stderr)
         sys.exit(1)
     out.write(2*os.linesep)
 
-    print >>sys.stdout,"Writing file", path, "was successful!"
+    print ("Writing file", path, "was successful!", file=sys.stderr)
 
     buf.close()
     out.close()
@@ -205,7 +205,7 @@ def do_action(args):
     Config.init(args.template)
 
     if not os.path.exists(args.header_file):
-        print >>sys.stderr,'The header file does not exist!'
+        print ('The header file does not exist!', file=sys.stderr)
         sys.exit(2)
 
     if args.auto_handle:
@@ -214,13 +214,13 @@ def do_action(args):
     buf = StringIO()
     node = Header(os.path.abspath(args.header_file))
     if not node.functions and not node.classes:
-        print >>sys.stderr, 'Nothing was generated. Is this a header file?'
+        print ( 'Nothing was generated. Is this a header file?', file=sys.stderr)
         sys.exit(1)
 
     if args.line_number:
         node = node.getNodeInLine(args.line_number)
         if not node:
-            print >>sys.stderr,'The specifed line number could not be found'
+            print ('The specifed line number could not be found', file=sys.stderr)
             sys.exit(3)
 
     # generate implement code
@@ -237,19 +237,19 @@ def do_action(args):
     elif args.force:
         out = open(args.output, 'w')
     else:
-       print >>sys.stderr,'The output file already exists. Please use "-a" arg to append to the end of the file  or "-f" to force an overwrite.'
+       print ('The output file already exists. Please use "-a" arg to append to the end of the file  or "-f" to force an overwrite.', file = sys.stderr)
        sys.exit(4)
 
     #output
     if len(buf.getvalue()):
         out.write(buf.getvalue().lstrip(os.linesep).rstrip(os.linesep))
     else:
-        print >>sys.stderr, 'Nothing generated'
+        print ( 'Nothing generated', file=sys.stderr)
         sys.exit(1)
     out.write(2*os.linesep)
 
     if out != sys.stdout:
-        print >>sys.stdout,"Writing file", args.output, "was successful!"
+        print ("Writing file", args.output, "was successful!", file=sys.stderr)
 
     buf.close()
     if type(out) == open:
@@ -259,7 +259,7 @@ if __name__=='__main__':
     args = parser.parse_args()
     try:
         do_action(args)
-    except (IOError,msg):
-        print >>sys.stderr,"IOError: ", msg
+    except IOError:
+        print ("IOError: ", file=sys.stderr)
         sys.exit(5)
 
