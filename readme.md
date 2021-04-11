@@ -35,31 +35,32 @@ Mapping example:
     nmap <F4>p :CpH2cppxLine<ESC>
     nmap <F5>  :H2cppxAuto<ESC>
 
-Config
+Configuration
 ------
 If the plugin can't find the python path in your computer,
-you need set "g:python_path" in the .vimrc file:
+you need set `g:python_path` in the .vimrc file:
 
     let g:h2cppx_python_path = '/usr/bin/python'
 
-and you can specify the .cpp file name extension like this:
-(default value is 'cpp')
+You can specify the file name extension as follows:
+(default is `.cpp`)
 
     let g:h2cppx_postfix = 'cxx'
 
-Five code-generate template file are provided by default, 
-you can configure them in '.vimrc' like this(template0-4,default is template1):
+Five code-generation template files are provided by default.
+You can configure them in `.vimrc` by specifiying templates 0-4: 
+(default is `template1`)
 
     let g:h2cppx_template = 'template4' 
 
 If needed, you can refer to the default template and write your own template
-files. Use the absolute path to configure it :
+files. Use the absolute path to configure it:
 
     let g:h2cppx_template = '/home/xxx/.../xxx'
 
 Finally, you can add a configuration file `.h2cppx_conf` in your project 
 directory to help the plugin search for a .cpp file. Otherwise the plugin will use
-.cpp file in your header file directory.
+`.cpp` file in your header file directory.
 The configuration file might look like:
     
     /home/test/temp/src
