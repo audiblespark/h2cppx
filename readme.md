@@ -27,7 +27,7 @@ Use your favorite plugin manager to install the plugin:
 
 Example fo vim-plug:
 
-    `Plug 'keeneared/h2cppx-vim'`
+    `Plug 'coldspark29/h2cppx-vim'`
 
 Mapping example:
 
