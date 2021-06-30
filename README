@@ -31,7 +31,7 @@ Example fo vim-plug:
 
 Mapping example:
 
-    e.g:
+    e.g.:
     nmap <F3>  :H2cppx<ESC>
     nmap <F4>  :H2cppxLine<ESC>
     nmap <F3>p :CpH2cppx<ESC>
